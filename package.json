@@ -1,0 +1,66 @@
+{
+  "name": "remix_fullstack_blog",
+  "private": true,
+  "sideEffects": false,
+  "type": "module",
+  "scripts": {
+    "build": "remix vite:build",
+    "dev": "remix vite:dev",
+    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "start": "remix-serve ./build/server/index.js",
+    "typecheck": "tsc",
+    "test": "dotenv -e .env.test -- vitest",
+    "db:migrate": "yarn dev:db:migrate && yarn dev:generate:client && yarn test:db:migrate",
+    "dev:db:migrate": "prisma migrate dev",
+    "dev:generate:client": "prisma generate",
+    "test:db:migrate": "dotenv -e .env.test -- prisma migrate dev --skip-seed",
+    "db:migrate:reset": "yarn dev:db:migrate:reset && yarn test:db:migrate:reset",
+    "dev:db:migrate:reset": "prisma migrate reset --force",
+    "test:db:migrate:reset": "dotenv -e .env.test -- prisma migrate reset --force --skip-seed",
+    "db:seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seeds.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.15.1",
+    "@remix-run/node": "^2.9.2",
+    "@remix-run/react": "^2.9.2",
+    "@remix-run/serve": "^2.9.2",
+    "isbot": "^5.1.9",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@quramy/prisma-fabbrica": "^2.1.4",
+    "@remix-run/dev": "^2.9.2",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@typescript-eslint/eslint-plugin": "^7.13.1",
+    "@typescript-eslint/parser": "^7.13.1",
+    "dotenv-cli": "^7.4.2",
+    "eslint": "^9.5.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.9.0",
+    "eslint-plugin-react": "^7.34.3",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-unused-imports": "^4.0.0",
+    "fishery": "^2.2.2",
+    "prisma": "^5.15.1",
+    "remix-flat-routes": "^0.6.5",
+    "tsx": "^4.15.7",
+    "typescript": "^5.5.2",
+    "vite": "^5.3.1",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.6.0",
+    "vitest-environment-vprisma": "^1.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "volta": {
+    "node": "20.11.1",
+    "yarn": "4.1.1"
+  }
+}
